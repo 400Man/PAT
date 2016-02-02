@@ -24,4 +24,5 @@ int main()
   for(int i = 0; i < 3; i++)
     printf("%c ",r[h[i]]);
   printf("%.2f\n",(sum * 0.65 -1.0)*2.0);
+  return 0;  
 }
