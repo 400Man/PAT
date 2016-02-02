@@ -4,7 +4,7 @@ int main()
 {
   long long p=0,pa=0,pat=0;
   int c;
-  while((c = getchar())!='\n'){
+  while((c= getchar())!='\n'){
     if(c == 'P')
       p++;
     if(c == 'A')
