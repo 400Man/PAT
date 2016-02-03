@@ -30,7 +30,3 @@ int main()
   printf("\n");
   
 }
-
-
-
-
