@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include<cstdio>
 
 struct Stu{
   char name[11];
