@@ -2,7 +2,12 @@
 #include<algorithm>
 #include<string.h>
 
+#define magicNum 20000
+
 using namespace std;
+
+int pairs[5000][2];
+int size=0;
 
 struct Car{
   char plate[8];
@@ -49,6 +54,8 @@ int main()
   
   sort(cars,cars+n,cmp);
   
+  if(m > magicNum)
+  {
   char temp[10];
   int j;
   int max = 0;
@@ -81,5 +88,50 @@ int main()
       printf("%s ",cars[i].plate);
       
   printf("%02d:%02d:%02d\n",max/3600,max%3600/60,max%60);
+  }
+  
+  else
+  {
+  char temp[10];
+  int j;
+  int max = 0;
+  for(int i = 1; i < n ; i++)
+  {
+    strcpy(temp,cars[i].plate);
+    int sum = 0;
+    while(strcmp(temp,cars[i].plate) == 0)
+    {
+      if(cars[i].state == 0 && cars[i-1].state == 1)
+      {
+        pairs[size][0] = cars[i-1].times;
+        pairs[size++][1] = cars[i].times;
+        cars[i-1].correct = 1;
+        sum += cars[i].times - cars[i-1].times;
+      }
+      j = i;
+      i++;
+    }
+    cars[j].span = sum;
+    if(sum > max)
+      max = sum;
+  }
+  
+    for(int i = 0; i < m ;i++)
+    {
+      int num = 0;
+      for(int j = 0; j < size ; j++)
+      {
+        if(requre[i] >= pairs[j][0] && requre[i] < pairs[j][1])
+          num++;
+      }
+      printf("%d\n",num);
+    }
+  
+  for(int i = 0; i < n; i++)
+    if(cars[i].span == max)
+      printf("%s ",cars[i].plate);
+      
+  printf("%02d:%02d:%02d\n",max/3600,max%3600/60,max%60);
+  }
 
 }
