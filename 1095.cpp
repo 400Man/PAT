@@ -7,7 +7,7 @@
 using namespace std;
 
 int pairs[5000][2];
-int size=0;
+int size = 0;
 
 struct Car{
   char plate[8];
