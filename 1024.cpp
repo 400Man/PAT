@@ -1,52 +1,55 @@
-//  10^10, 100次，long long 根本放不下
-
 #include<stdio.h>
+#include<string.h>
 
-long long reverse(long long a){
-  long long num=0;
-  while(a!=0){
-    num = num*10 + a%10;
-    a /= 10;
-  }
-  return num;
-}
-
-bool isPa(long long b){
-  char a[15];
-  int size =0;
-  for(int i = 0; b != 0; i++){
-    a[size++] = b%10;
-    b /= 10;
-  }
-  for(int i = 0, j = size-1; i<j;i++,j--){
+bool isPa(char a[]){
+  for(int i = 0, j = strlen(a)-1; i < j; i++,j--)
     if(a[i] != a[j])
       return false;
-  }
   return true;
 }
 
+void add(char a[],char u[]){
+  int shift = 0;
+  int i,j;
+  for(i = 0,j = strlen(a)-1; i < strlen(a);i++,j--){
+    if((a[i] + a[j] - '0' - '0' + shift) > 9){
+      u[i] = a[i] + a[j] + shift - '0' - 10;
+      shift = 1;
+    }
+    else{
+      u[i] = a[i] + a[j] + shift - '0';
+      shift = 0;
+    }
+  }
+  if(shift == 1)
+    u[i++] = '1';
+  u[i] = '\0';
+}
 
 int main()
 {
-  long long a;
-  int b;
-  scanf("%lld %d",&a,&b);
-  long long u=a;
-  if(isPa(u))
-    {
-      printf("%lld\n0\n",u);
-      return 0;
-    }
-  for(int i = 0; i < b; i++)
-  {
-    u = a + reverse(a);
-    if(isPa(u))
-    {
-      printf("%lld\n%d\n",u,i+1);
-      return 0;
-    }
-    a = u;
+  char a[200];
+  char u[200];
+  int size;
+  int times;
+  int shift = 0;
+  scanf("%s %d",a,&times);
+  if(isPa(a)){
+    printf("%s\n0\n",a);
+    return 0;
   }
-  printf("%lld\n%d\n",u,b);
+
+  for(int i = 0; i < times ; i++)
+  {
+    add(a,u);
+    if(isPa(u)){
+      printf("%s\n%d\n",u,i+1);
+      return 0;
+    }
+    strcpy(a,u);
+  }
+  for(int i = strlen(a)-1;i>=0;i--)
+    putchar(a[i]);
+  printf("\n%d\n",times);
   return 0;
 }
