@@ -1,4 +1,4 @@
-#  talent idea
+//#  talent idea
 
 #include<stdio.h>
 #include<algorithm>
