@@ -54,6 +54,5 @@ int main()
       }
     }
   }
-  // printf("%s\n",input[i].c_str());
   return 0;
 }
