@@ -2,38 +2,35 @@
 #include<math.h>
 
 int isPrime(int x){
-  for(int i = 2;i < sqrt(x)+1;i++){
-    if(x%i == 0){
+  if(x <= 1)
+    return 0;
+  for(int i = 2;i <= (int)sqrt(1.0*x);i++)
+    if(x%i == 0)
       return 0;
-    }
-  }
   return 1;
 }
 
 int main()
 {
-  int n,Tsize;
+  int n,Tsize,j,key;
+  int flag[100000] = {0};
   scanf("%d %d",&Tsize,&n);
   while(!isPrime(Tsize)){
     Tsize++;
   }
-  int a[Tsize];
-  int flag[100000] = {0};
+  
   for(int i = 0;i < n; i++){
-    for(int j = 0; j < Tsize; j++){
-      if(flag[(i+j*j)%Tsize] == 0){
-      a[(i+j*j)%Tsize] = i;
-      flag[(i+j*j)%Tsize] = 1;
-      printf("%d ",(i+j*j)%Tsize);
+    scanf("%d",&key);
+    for(j = 0; j < Tsize; j++){
+      int m = (key + j*j)%Tsize;
+      if(flag[m] == 0){
+      flag[m] = 1;
+      printf(i == n-1?"%d\n":"%d ",m);
       break;
       }
     }
-    printf("- ");
+    if(j >= Tsize)
+      printf(i == n-1?"-\n":"- ");
   }
-  
-  
-  
-  
-  
-  // printf("%d\n",Tsize);
+  return 0;
 }
