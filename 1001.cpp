@@ -12,7 +12,7 @@ int main()
     sign = 1;
     a = -a;
   }
-  
+   
   if(a == 0)
     putchar('0');
   else
