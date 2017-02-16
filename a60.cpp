@@ -4,7 +4,7 @@
 using namespace std;
 
 int all_zero(string str){
-	dot_loc = str.find('.');
+	int dot_loc = str.find('.');
 	if(dot_loc!=-1)
 		str.erase(str.begin()+dot_loc);
 	for(int i=0;i<str.size();i++)
