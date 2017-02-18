@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main(){
+int main(){ 
 	int n,k,num;
 	scanf("%d",&n);
 	vector<set<int> > vt;
