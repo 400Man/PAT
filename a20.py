@@ -43,6 +43,7 @@ class Tree:
 	def reverse(self,root):
 		if(root):
 			root.left,root.right = self.reverse(root.right),self.reverse
+		return root
 
 
 _=input()

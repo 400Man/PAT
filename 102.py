@@ -50,8 +50,3 @@ Tree().level(root)
 Tree().inOrder(root)
 print(*lev_list)
 print(*in_list)
-
-
-
-
-
