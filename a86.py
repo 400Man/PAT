@@ -15,15 +15,33 @@ class Tree:
 			post_lis.append(root.val)
 
 	def build(self,preOrder,inOrder):
-		if(preOrder):
+		if(inOrder):
 			k = inOrder.index(preOrder.pop(0))
 			root = TreeNode(inOrder[k])
 			root.left = self.build(preOrder,inOrder[:k])
 			root.right = self.build(preOrder,inOrder[k+1:])
-		return root
+			return root
 
-pre=[1,2,3,4,5,6]
-ino=[3,2,4,1,6,5]
+# pre=[1,2,3,4,5,6]
+# ino=[3,2,4,1,6,5]
+
+pre=[]
+ino=[]
+
+vec = []
+n = int(input())*2
+for i in range(n):
+	s = input()
+	if(s=='Pop'):
+		ino.append(vec.pop())
+	else:
+		num = int(s[s.index(' '):])
+		vec.append(num)
+		pre.append(num)
+
 
 root = Tree().build(pre,ino)
-# print(Tree().postOrder(root))
+
+Tree().postOrder(root)
+print(*post_lis)
+
