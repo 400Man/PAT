@@ -21,6 +21,23 @@ class Tree:
             root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
         return root
         
+    def pathSum(self, root, sum):
+        return self.pathSumRecu([], [], root, sum)
+    
+    def pathSumRecu(self, result, cur, root, sum):
+        if root is None:
+            return result
+        
+        if root.left is None and root.right is None and root.val == sum:
+            result.append(cur + [root.val])
+            return result
+        
+        cur.append(root.val)
+        self.pathSumRecu(result, cur, root.left, sum - root.val)
+        self.pathSumRecu(result, cur, root.right, sum - root.val)
+        cur.pop()
+        return result
+        
 if __name__ == "__main__":
     node = [None]*8
     for i in range(8):
@@ -38,14 +55,12 @@ if __name__ == "__main__":
 
     result = Tree().isBalanced(root)
     print(result)
-    print(node[6].left.val)
+    # print(node[6].left.val)
 
-    print(Tree().getHeight(node[3]))
-
-    
+    print(Tree().getHeight(root))
 
 
-
+    print(Tree().pathSum(root, 14))
 
 
 
