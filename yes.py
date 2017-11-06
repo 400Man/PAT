@@ -1,3 +1,1 @@
-with open('1.txt') as f:
-	print(sum(1 for _ in f))
-	print(list(f))
+df = pd.DataFrame([[1,2],[3,4]],columns=['A','B'])

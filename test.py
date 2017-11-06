@@ -1,52 +1,63 @@
-"""You can use this class to represent how classy someone
-or something is.
-"Classy" is interchangable with "fancy".
-If you add fancy-looking items, you will increase
-your "classiness".
-Create a function in "Classy" that takes a string as
-input and adds it to the "items" list.
-Another method should calculate the "classiness"
-value based on the items.
-The following items have classiness points associated
-with them:
-"tophat" = 2
-"bowtie" = 4
-"monocle" = 5
-Everything else has 0 points.
-Use the test cases below to guide you!"""
+class UnionFind:
 
-class Classy(object):
-    def __init__(self):
-        self.items = []
-        self.dic = {"tophat" : 2,"bowtie" : 4,"monocle" : 5}
-    def addItem(self,item):
-        self.items.append(item)
-    def getClassiness(self):
-        points = 0
-        for item in self.items:
-            if(self.dic.get(item)):
-                points+=self.dic.get(item)
-        print points
-            
-            
-    
+    def __init__(self, n):
+        self.parent = list(range(n))
+        self.rank = [0]*n
 
-# Test cases
-me = Classy()
+    def find(self, v):
+        if(v==self.parent[v]):
+            return v
+        else:
+            return self.find(self.parent[v])
+        # if not v == self.parent[v]:
+        #     self.parent[v] = self.find(self.parent[v])
+        # return self.parent[v]
+ 
+    def union(self, x, y):
+        xRoot = self.find(x)
+        yRoot = self.find(y)
+        self.parent[xRoot] = yRoot
+        # if xRoot == yRoot:
+        #     return
+        # if self.rank[xRoot] > self.rank[yRoot]:
+        #     self.parent[yRoot] = xRoot
+        # else:
+        #     self.parent[xRoot] = yRoot
+        #     if self.rank[xRoot] == self.rank[yRoot]:
+        #         self.rank[yRoot] += 1
+ 
+    def printParent(self):
+        print("index: ",list(range(9)))
+        print("parent: ", self.parent, sep='')
 
-# Should be 0
-print(me.getClassiness())
 
-me.addItem("tophat")
-# Should be 2
-print(me.getClassiness())
-
-me.addItem("bowtie")
-me.addItem("jacket")
-me.addItem("monocle")
-# Should be 11
-print(me.getClassiness())
-
-me.addItem("bowtie")
-# Should be 15
-print(me.getClassiness())
+if __name__ == '__main__':
+    # Part a)
+    uf = UnionFind(9)
+    uf.union(2,1)
+    uf.union(4,3)
+    uf.union(6,5)
+    print("\nParent array after union(2,1), union(4,3) and union(6,5):")
+    uf.printParent()
+ 
+    # Part b)
+    uf.union(2,4)
+    print("\nParent array after union(2,4)")
+    uf.printParent()
+ 
+    # Part c)
+    uf.find(2)
+    print("\nParent array after find(2)")
+    uf.printParent()
+ 
+    # Part d)
+    myDict = {}
+    for node in range(9):
+        root = uf.find(node)
+        if not root in myDict:
+            myDict[root] = set([node])
+        else:
+            myDict[root].add(node)
+    print("\nDisjoint sets: ")
+    for mySet in myDict.values():
+        print(mySet)
